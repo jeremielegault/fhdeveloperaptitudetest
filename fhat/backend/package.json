@@ -1,0 +1,23 @@
+{
+  "name": "flighthubdevapttest",
+  "version": "1.0.0",
+  "description": "This is the backend app for fhat",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev:backend": "nodemon server.js"
+  },
+  "author": "Jeremie Legault <jeremie_legault@hotmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "assert": "^2.0.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "file-system": "^2.2.2",
+    "moment": "^2.24.0",
+    "morgan": "^1.10.0",
+    "node": "^17.0.1",
+    "nodemon": "^2.0.2",
+    "uuid": "^8.3.1"
+  }
+}
