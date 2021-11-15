@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import FormContext from "./Reducers/FormContext";
 
-const Homepage = () => {
+const DropResults = () => {
   const { v4: uuidv4 } = require("uuid");
 
   const formContext = useContext(FormContext);
@@ -15,23 +15,45 @@ const Homepage = () => {
 
   const [formData, setFormData] = useState({ dropdown, search });
 
+  // State to store results of dropResults fetch
+  const [dropResults, setDropResults] = useState();
+
+  // Use effect to generate activity dynamically
+  useEffect(() => {
+    fetch(`http://localhost:8000/get${formContext.state.dropdown}`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("response in RESULTS then", data.data.results);
+        setDropResults(data.data.results);
+      })
+      .catch((err) => {
+        console.log("Error", err);
+      });
+  }, []);
+
   return (
     <div>
-      <h1>Hello</h1>
-      <FormLabel>Which list do you wish to display?</FormLabel>
-      <DropdownForm
-        selected={formData.dropdown}
-        value={formData.dropdown}
-        onChange={(event) => {
-          setFormData({ ...formData, dropdown: event.target.value });
-        }}
-      >
-        <option defaultValue="None"></option>
-        <option value="people">People</option>
-        <option value="planets">Planets</option>
-        <option value="starships">Starships</option>
-      </DropdownForm>
-      <Link to="/dropresults">
+      {dropResults ? (
+        dropResults.map((dropResult) => (
+          <SugWrap>
+            <Suggestion key={uuidv4()}>
+              <SugTit>Name:</SugTit> {dropResult.name} <SugTit>Mass:</SugTit>
+              {dropResult.mass}
+              <DivLine />
+            </Suggestion>
+          </SugWrap>
+        ))
+      ) : (
+        // If the user did not select an dropResult preference, don't render anything
+        <p>No Results, sorry!</p>
+      )}
+      <Link to="/">
         <Button
           onClick={(e) => {
             receiveFormInfo({
@@ -106,4 +128,4 @@ const SugWrap = styled.div`
   margin-top: 2px;
 `;
 
-export default Homepage;
+export default DropResults;

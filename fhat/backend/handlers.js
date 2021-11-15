@@ -31,7 +31,7 @@ const getPlanets = async (req, res) => {
   var request = {
     method: "get",
     url: "https://swapi.dev/api/planets/",
-    headers: {},
+    headers: { "Access-Control-Allow-Origin": "*" },
   };
   return axios(request)
     .then(function (response) {

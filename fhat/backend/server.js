@@ -5,6 +5,8 @@ const express = require("express");
 
 const morgan = require("morgan");
 
+var cors = require("cors");
+
 // import handler functions
 const {
   getPeople,
@@ -13,6 +15,14 @@ const {
   searchPerson,
 } = require("./handlers");
 
+// app.use(function (req, res, next) {
+//   res.setHeader("Access-Control-Allow-Origin", "*");
+//   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+//   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+//   res.setHeader("Access-Control-Allow-Credentials", true);
+//   next();
+// });
+
 express()
   // Below are methods that are included in express(). We chain them for convenience.
   // --------------------------------------------------------------------------------
@@ -20,6 +30,8 @@ express()
   // This will give us will log more info to the console. see https://www.npmjs.com/package/morgan
   .use(morgan("tiny"))
   .use(express.json())
+  .use(cors())
+  .enable("trust proxy")
 
   // Any requests for static files will go into the public folder
   .use(express.static("public"))

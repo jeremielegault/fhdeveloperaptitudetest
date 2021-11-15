@@ -1,6 +1,6 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Homepage from "./Components/Homepage";
-import DropResults from "./DropResults";
+import DropResults from "./Components/DropResults";
 
 function App() {
   return (
