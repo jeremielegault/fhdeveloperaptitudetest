@@ -8,13 +8,6 @@ const SearchResults = () => {
 
   const formContext = useContext(FormContext);
 
-  const {
-    state: { dropdown, search },
-    receiveFormInfo,
-  } = useContext(FormContext);
-
-  const [formData, setFormData] = useState({ dropdown, search });
-
   // State to store results of searchResults fetch
   const [searchResults, setSearchResults] = useState();
 
@@ -35,7 +28,7 @@ const SearchResults = () => {
       .catch((err) => {
         console.log("Error", err);
       });
-  }, []);
+  }, [formContext.state.search]);
 
   return (
     <div>
@@ -54,52 +47,16 @@ const SearchResults = () => {
         <p>No Results, sorry!</p>
       )}
       <Link to="/">
-        <Button
-          onClick={(e) => {
-            receiveFormInfo({
-              ...formData,
-            });
-          }}
-        >
-          Back
-        </Button>
+        <Button>Back</Button>
       </Link>
     </div>
   );
 };
 
-const FormLabel = styled.label`
-  font-size: 1rem;
-  padding-bottom: 15px;
-`;
-
-const PageTitle = styled.h1`
-  font-size: 1.802rem;
-`;
-
-const WhatWrap = styled.div`
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #bee0ed;
-  height: 100vh;
-  text-align: center;
-  justify-content: center;
-`;
-
 const DivLine = styled.div`
   border: 1px;
   margin: 5px 0 5px;
   width: 500px;
-`;
-
-const DropdownForm = styled.select`
-  background-color: #87a1c6;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  font-weight: bold;
 `;
 
 const Button = styled.button`

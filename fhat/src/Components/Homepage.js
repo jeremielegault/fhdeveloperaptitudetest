@@ -1,13 +1,9 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import FormContext from "./Reducers/FormContext";
 
 const Homepage = () => {
-  const { v4: uuidv4 } = require("uuid");
-
-  const formContext = useContext(FormContext);
-
   const {
     state: { dropdown, search },
     receiveFormInfo,
@@ -52,7 +48,7 @@ const Homepage = () => {
         onChange={(event) => {
           setFormData({ ...formData, search: event.target.value });
         }}
-        placeholder="Write groom's name here"
+        placeholder="Name"
       ></input>
       <DivLine />
 
@@ -74,21 +70,6 @@ const Homepage = () => {
 const FormLabel = styled.label`
   font-size: 1rem;
   padding-bottom: 15px;
-`;
-
-const PageTitle = styled.h1`
-  font-size: 1.802rem;
-`;
-
-const WhatWrap = styled.div`
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #bee0ed;
-  height: 100vh;
-  text-align: center;
-  justify-content: center;
 `;
 
 const DivLine = styled.div`
@@ -115,20 +96,4 @@ const Button = styled.button`
   color: white;
   font-size: 1.266rem;
 `;
-
-const SugTit = styled.div`
-  font-weight: bold;
-`;
-const Suggestion = styled.div``;
-
-const SugWrap = styled.div`
-  background-color: #87a1c6;
-  color: white;
-  border-radius: 5px;
-  padding: 3px 0 3px 0;
-  margin-left: 3px;
-  margin-right: 3px;
-  margin-top: 2px;
-`;
-
 export default Homepage;
