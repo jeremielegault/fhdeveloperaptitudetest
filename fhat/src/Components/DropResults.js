@@ -61,7 +61,7 @@ const DropResults = () => {
             });
           }}
         >
-          Next
+          Back
         </Button>
       </Link>
     </div>

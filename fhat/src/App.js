@@ -1,6 +1,7 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Homepage from "./Components/Homepage";
 import DropResults from "./Components/DropResults";
+import SearchResults from "./Components/SearchResults";
 
 function App() {
   return (
@@ -11,6 +12,9 @@ function App() {
         </Route>
         <Route exact path="/dropresults">
           <DropResults />
+        </Route>
+        <Route exact path="/searchresults">
+          <SearchResults />
         </Route>
       </Switch>
     </BrowserRouter>

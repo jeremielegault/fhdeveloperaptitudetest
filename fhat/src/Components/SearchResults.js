@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import FormContext from "./Reducers/FormContext";
 
-const Homepage = () => {
+const SearchResults = () => {
   const { v4: uuidv4 } = require("uuid");
 
   const formContext = useContext(FormContext);
@@ -15,24 +15,45 @@ const Homepage = () => {
 
   const [formData, setFormData] = useState({ dropdown, search });
 
+  // State to store results of searchResults fetch
+  const [searchResults, setSearchResults] = useState();
+
+  // Use effect to generate activity dynamically
+  useEffect(() => {
+    fetch(`http://localhost:8000/searchperson/${formContext.state.search}`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("response in RESULTS then", data.data.results);
+        setSearchResults(data.data.results);
+      })
+      .catch((err) => {
+        console.log("Error", err);
+      });
+  }, []);
+
   return (
     <div>
-      <h1>Hello</h1>
-      <FormLabel>Which list do you wish to display?</FormLabel>
-      <DropdownForm
-        selected={formData.dropdown}
-        value={formData.dropdown}
-        onChange={(event) => {
-          setFormData({ ...formData, dropdown: event.target.value });
-        }}
-      >
-        <option defaultValue="None"></option>
-        <option value="people">People</option>
-        <option value="planets">Planets</option>
-        <option value="starships">Starships</option>
-      </DropdownForm>
-      <DivLine />
-      <Link to="/dropresults">
+      {searchResults ? (
+        searchResults.map((searchResult) => (
+          <SugWrap>
+            <Suggestion key={uuidv4()}>
+              <SugTit>Name:</SugTit> {searchResult.name} <SugTit>Mass:</SugTit>
+              {searchResult.mass}
+              <DivLine />
+            </Suggestion>
+          </SugWrap>
+        ))
+      ) : (
+        // If the user did not select an searchResult preference, don't render anything
+        <p>No Results, sorry!</p>
+      )}
+      <Link to="/">
         <Button
           onClick={(e) => {
             receiveFormInfo({
@@ -40,31 +61,7 @@ const Homepage = () => {
             });
           }}
         >
-          Dropdown
-        </Button>
-      </Link>
-      <h2>OR</h2>
-      <FormLabel>Search for a person by typing their name here:</FormLabel>
-      <input
-        type="text"
-        value={formData.search}
-        name="search"
-        onChange={(event) => {
-          setFormData({ ...formData, search: event.target.value });
-        }}
-        placeholder="Write groom's name here"
-      ></input>
-      <DivLine />
-
-      <Link to="/searchresults">
-        <Button
-          onClick={(e) => {
-            receiveFormInfo({
-              ...formData,
-            });
-          }}
-        >
-          Search
+          Back
         </Button>
       </Link>
     </div>
@@ -107,7 +104,7 @@ const DropdownForm = styled.select`
 
 const Button = styled.button`
   height: 35px;
-  width: auto;
+  width: 60px;
   font-weight: bold;
   background-color: #ebab00;
   border: none;
@@ -131,4 +128,4 @@ const SugWrap = styled.div`
   margin-top: 2px;
 `;
 
-export default Homepage;
+export default SearchResults;
