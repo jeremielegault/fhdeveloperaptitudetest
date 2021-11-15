@@ -2,16 +2,11 @@
 
 // import the needed node_modules.
 const express = require("express");
+
 const morgan = require("morgan");
-// const {
-//   getFlights,
-//   getFlight,
-//   getReservations,
-//   addReservations,
-//   getSingleReservation,
-//   deleteReservation,
-//   updateReservation,
-// } = require("./handlers");
+
+// import handler functions
+const { getPeople } = require("./handlers");
 
 express()
   // Below are methods that are included in express(). We chain them for convenience.
@@ -28,20 +23,17 @@ express()
   // ---------------------------------
   // add new endpoints here 👇
   //
-  //get all the flights
-  //   .get("/getflights", getFlights)
-  //   //get one flight based on id
-  //   .get("/getflights/seats/:_id", getFlight)
-  //   // Get the reservations
-  //   .get("/getreservations", getReservations)
-  //   // Add a reservation
-  //   .post("/addreservations", addReservations)
-  //   // Get single reservation based on ID
-  //   .get("/getreservation/:id", getSingleReservation)
-  //   // Delete single reservation based on ID
-  //   .delete("/deletereservation/:id", deleteReservation)
-  //   // Update reservation info
-  //   .put("/getreservation/:id", updateReservation)
+  // get the people
+  .get("/getpeople", getPeople)
+
+  //get the list of planets
+  // .get("/getplanets", getPlanets)
+
+  // // Get the starships
+  // .get("/getstarships", getStarships)
+
+  // // Search for a person
+  // .post("/searchperson", searchPerson)
 
   //
   // add new endpoints here ☝️
@@ -58,3 +50,5 @@ express()
 
   // Node spins up our server and sets it to listen on port 8000.
   .listen(8000, () => console.log(`Listening on port 8000`));
+
+//   https://github.com/cb-wd-9/nodejs-promises
