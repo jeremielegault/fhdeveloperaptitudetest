@@ -18,7 +18,7 @@ const DropResults = () => {
   // State to store results of dropResults fetch
   const [dropResults, setDropResults] = useState();
 
-  // Use effect to generate activity dynamically
+  // Use effect to generate get either people, planets or starships
   useEffect(() => {
     fetch(`http://localhost:8000/get${formContext.state.dropdown}`, {
       method: "GET",
@@ -35,16 +35,15 @@ const DropResults = () => {
       .catch((err) => {
         console.log("Error", err);
       });
-  }, []);
+  }, [formContext.state.dropdown]);
 
   return (
-    <div>
+    <Wrapper>
       {dropResults ? (
         dropResults.map((dropResult) => (
           <SugWrap>
             <Suggestion key={uuidv4()}>
-              <SugTit>Name:</SugTit> {dropResult.name} <SugTit>Mass:</SugTit>
-              {dropResult.mass}
+              <SugTit>Name:</SugTit> {dropResult.name}
               <DivLine />
             </Suggestion>
           </SugWrap>
@@ -64,29 +63,9 @@ const DropResults = () => {
           Back
         </Button>
       </Link>
-    </div>
+    </Wrapper>
   );
 };
-
-const FormLabel = styled.label`
-  font-size: 1rem;
-  padding-bottom: 15px;
-`;
-
-const PageTitle = styled.h1`
-  font-size: 1.802rem;
-`;
-
-const WhatWrap = styled.div`
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #bee0ed;
-  height: 100vh;
-  text-align: center;
-  justify-content: center;
-`;
 
 const DivLine = styled.div`
   border: 1px;
@@ -94,23 +73,17 @@ const DivLine = styled.div`
   width: 500px;
 `;
 
-const DropdownForm = styled.select`
-  background-color: #87a1c6;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  font-weight: bold;
-`;
-
 const Button = styled.button`
+  justify-content: center;
   height: 35px;
   width: 60px;
   font-weight: bold;
-  background-color: #ebab00;
+  background-color: #bb2020;
   border: none;
   border-radius: 5px;
   color: white;
   font-size: 1.266rem;
+  margin-top: 15px;
 `;
 
 const SugTit = styled.div`
@@ -119,13 +92,19 @@ const SugTit = styled.div`
 const Suggestion = styled.div``;
 
 const SugWrap = styled.div`
-  background-color: #87a1c6;
+  background-color: #bec7c7;
   color: white;
   border-radius: 5px;
   padding: 3px 0 3px 0;
   margin-left: 3px;
   margin-right: 3px;
   margin-top: 2px;
+`;
+
+const Wrapper = styled.div`
+  background-color: #ffeb4d;
+  align-items: center;
+  justify-content: center;
 `;
 
 export default DropResults;

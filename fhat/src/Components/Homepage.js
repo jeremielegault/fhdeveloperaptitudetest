@@ -12,9 +12,12 @@ const Homepage = () => {
   const [formData, setFormData] = useState({ dropdown, search });
 
   return (
-    <div>
-      <h1>Hello</h1>
-      <FormLabel>Which list do you wish to display?</FormLabel>
+    <Wrapper>
+      <h1>Star Wars Data Finder</h1>
+      <FormLabel>
+        Choose between a list of a planets, people and starships from the Star
+        Wars Universe
+      </FormLabel>
       <DropdownForm
         selected={formData.dropdown}
         value={formData.dropdown}
@@ -63,23 +66,23 @@ const Homepage = () => {
           Search
         </Button>
       </Link>
-    </div>
+    </Wrapper>
   );
 };
 
-const FormLabel = styled.label`
+const FormLabel = styled.h3`
   font-size: 1rem;
   padding-bottom: 15px;
 `;
 
 const DivLine = styled.div`
-  border: 1px;
-  margin: 5px 0 5px;
+  color: black;
+  padding: 5px 0 5px 0;
   width: 500px;
 `;
 
 const DropdownForm = styled.select`
-  background-color: #87a1c6;
+  background-color: #bec7c7;
   border: none;
   border-radius: 5px;
   color: white;
@@ -88,12 +91,20 @@ const DropdownForm = styled.select`
 
 const Button = styled.button`
   height: 35px;
+  align-items: center;
   width: auto;
   font-weight: bold;
-  background-color: #ebab00;
+  background-color: #bb2020;
   border: none;
   border-radius: 5px;
   color: white;
   font-size: 1.266rem;
 `;
+
+const Wrapper = styled.div`
+  background-color: #ffeb4d;
+  align-items: center;
+  justify-content: center;
+`;
+
 export default Homepage;

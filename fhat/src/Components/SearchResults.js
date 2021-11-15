@@ -31,7 +31,7 @@ const SearchResults = () => {
   }, [formContext.state.search]);
 
   return (
-    <div>
+    <Wrapper>
       {searchResults ? (
         searchResults.map((searchResult) => (
           <SugWrap>
@@ -49,21 +49,20 @@ const SearchResults = () => {
       <Link to="/">
         <Button>Back</Button>
       </Link>
-    </div>
+    </Wrapper>
   );
 };
 
 const DivLine = styled.div`
   border: 1px;
   margin: 5px 0 5px;
-  width: 500px;
 `;
 
 const Button = styled.button`
   height: 35px;
   width: 60px;
   font-weight: bold;
-  background-color: #ebab00;
+  background-color: #bb2020;
   border: none;
   border-radius: 5px;
   color: white;
@@ -76,13 +75,19 @@ const SugTit = styled.div`
 const Suggestion = styled.div``;
 
 const SugWrap = styled.div`
-  background-color: #87a1c6;
+  background-color: #bec7c7;
   color: white;
   border-radius: 5px;
   padding: 3px 0 3px 0;
   margin-left: 3px;
   margin-right: 3px;
   margin-top: 2px;
+`;
+
+const Wrapper = styled.div`
+  background-color: #ffeb4d;
+  align-items: center;
+  justify-content: center;
 `;
 
 export default SearchResults;
