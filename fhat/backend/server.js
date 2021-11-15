@@ -6,7 +6,12 @@ const express = require("express");
 const morgan = require("morgan");
 
 // import handler functions
-const { getPeople } = require("./handlers");
+const {
+  getPeople,
+  getPlanets,
+  getStarships,
+  searchPerson,
+} = require("./handlers");
 
 express()
   // Below are methods that are included in express(). We chain them for convenience.
@@ -27,13 +32,13 @@ express()
   .get("/getpeople", getPeople)
 
   //get the list of planets
-  // .get("/getplanets", getPlanets)
+  .get("/getplanets", getPlanets)
 
   // // Get the starships
-  // .get("/getstarships", getStarships)
+  .get("/getstarships", getStarships)
 
   // // Search for a person
-  // .post("/searchperson", searchPerson)
+  .get("/searchperson/:id", searchPerson)
 
   //
   // add new endpoints here ☝️
