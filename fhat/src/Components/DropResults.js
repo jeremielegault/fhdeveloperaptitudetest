@@ -29,7 +29,6 @@ const DropResults = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("response in RESULTS then", data.data.results);
         setDropResults(data.data.results);
       })
       .catch((err) => {

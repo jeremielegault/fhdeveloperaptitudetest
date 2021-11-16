@@ -22,7 +22,6 @@ const SearchResults = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("response in RESULTS then", data.data.results);
         setSearchResults(data.data.results);
       })
       .catch((err) => {
